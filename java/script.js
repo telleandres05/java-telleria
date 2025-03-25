@@ -58,7 +58,8 @@ function iniciarCompra() {
         }
 
     }
-
+    
+    //Productos adquiridos y total a pagar
     if (carrito.length > 0) {
         let detalleCompra = "Resumen de tu compra:\n";
         carrito.forEach(item => {
