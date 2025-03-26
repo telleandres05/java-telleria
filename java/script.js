@@ -20,7 +20,7 @@ function iniciarCompra() {
     while (seguirComprando === true) {
         let listaProductos = "¿Qué producto deseas comprar?\n";
         productos.forEach((producto, index) => {
-            listaProductos += `${index + 1}. ${producto.nombre} - $${producto.precio}\n`;
+            listaProductos += `${index + 1}. ${producto.nombre} - ${producto.precio}$\n`;
         });
 
         let opcion = prompt(listaProductos) - 1;
@@ -68,9 +68,22 @@ function iniciarCompra() {
         detalleCompra += `Total a pagar: $${total}`;
         alert(detalleCompra);
     } else {
-        alert("No realizaste ninguna compra.");
+        alert("Carrito vacio");
     }
-}
+
+    // Cashearlo
+
+    // Cashea es una aplicacion venezolana por la cual se obtienen productos a credito y la compra minima para su uso son 25$
+    switch (total >= 25){
+        case true:
+            alert(`tu total es de ${total}$ puedes usar Cashea y pagarlo a cuotas`);
+            break;
+        case false:
+            alert(`tu total no es de ${total}$ NO puedes usar Cashea y pagarlo a cuotas`);
+            break;
+            default:
+        }
+    }
 
 
 // Llamada a la funcion para iniciar el carrito
