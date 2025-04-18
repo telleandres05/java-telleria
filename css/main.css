@@ -206,7 +206,7 @@ footer {
   padding: 3px;
 }
 
-#index #acc #productos #naruto{
+#index #acc #productos #naruto, #index #acc #productos #dbz{
   display: flex;
   flex-direction: row;
 }
@@ -264,7 +264,7 @@ footer {
   text-align: center;
 }
 
-#acc #naruto .grupo .img .botton .botton1 .agregar-carrito{
+#acc #naruto .grupo .img .botton .botton1 .agregar-carrito, #acc #dbz .grupo .img .botton .botton1 .agregar-carrito{
   background-color: #f4a710;
   border: none;
 }

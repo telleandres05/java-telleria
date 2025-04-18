@@ -1,30 +1,22 @@
 // Productos en stock
 const prodNaruto = [
-    { 
-        nombre: "Anillos de Akatsuki",
-        precio: 2.00,
-        id: 1
-    },
-    {
-        nombre: "Collar de Naruto",
-        precio: 1.75,
-        id: 2
-    },
-    {   
-        nombre: "Lámpara de Naruto",
-        precio: 20,
-        id: 3
-    },
+    { nombre: "Anillos de Akatsuki", precio: 2.00, id: 1 },
+    { nombre: "Collar de Naruto", precio: 1.75, id: 2 },
+    { nombre: "Lámpara de Naruto", precio: 20, id: 3 }
+];
+
+const prodDbz = [
+    { nombre: "Lámpara de Goku", precio: 15.75, id: 4 },
+    { nombre: "Llaveros de Cápsulas", precio: 7.25, id: 5 },
+    { nombre: "Llaveros de Esferas", precio: 5.5, id: 6 }
 ];
 
 // Variables globales
 let carrito = [];
 
-// Seleccionamos la sección de Naruto para insertar los productos
-const section = document.querySelector("#index #acc #naruto");
-
-// Mapeamos los productos a HTML
-const arrayFromProdNaruto = prodNaruto.map(producto => `
+// Función para mostrar productos
+function mostrarProductos(productos, section) {
+    section.innerHTML = productos.map(producto => `
     <div class="grupo">
         <div class="img">
             <img src="./img/${producto.id}.jpg" alt="${producto.nombre}" />
@@ -41,10 +33,14 @@ const arrayFromProdNaruto = prodNaruto.map(producto => `
             </div>
         </div>
     </div>
-`);
+`).join('')};
 
-// Insertamos los productos en el HTML
-section.innerHTML = arrayFromProdNaruto.join("");
+// Mostrar productos en las secciones correspondientes
+const sectionNaruto = document.querySelector("#naruto");
+const sectionDbz = document.querySelector("#dbz");
+
+mostrarProductos(prodNaruto, sectionNaruto);
+mostrarProductos(prodDbz, sectionDbz);
 
 // Función para actualizar el carrito
 function actualizarCarrito() {
@@ -66,12 +62,14 @@ function actualizarCarrito() {
     }
 }
 
-// Agregar al carrito
+// Agregar al carrito (tanto productos de Naruto como DBZ)
 document.querySelectorAll(".agregar-carrito").forEach(button => {
     button.addEventListener("click", function() {
         const idProducto = parseInt(this.getAttribute("data-id"));
-        const producto = prodNaruto.find(p => p.id === idProducto);
-
+        
+        // Buscar el producto en los dos arrays (Naruto y DBZ)
+        let producto = prodNaruto.find(p => p.id === idProducto) || prodDbz.find(p => p.id === idProducto);
+        
         const productoEnCarrito = carrito.find(p => p.id === producto.id);
 
         if (productoEnCarrito) {
