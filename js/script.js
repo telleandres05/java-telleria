@@ -11,10 +11,10 @@ const prodDbz = [
     { nombre: "Llaveros de Esferas", precio: 5.5, id: 6 }
 ];
 
-// Variables globales
+// Variable
 let carrito = [];
 
-// Función para mostrar productos
+// Mostrar productos en HTML
 function mostrarProductos(productos, section) {
     section.innerHTML = productos.map(producto => 
     `<div class="grupo">
@@ -36,20 +36,20 @@ function mostrarProductos(productos, section) {
 ).join('');
 }
 
-// Mostrar productos en las secciones correspondientes
+// Agregar en el codigo HTML en las secciones correspondientes
 const sectionNaruto = document.querySelector("#naruto");
 const sectionDbz = document.querySelector("#dbz");
 
 mostrarProductos(prodNaruto, sectionNaruto);
 mostrarProductos(prodDbz, sectionDbz);
 
-// Función para actualizar el carrito
+// Anexar productos el carrito
 function actualizarCarrito() {
     const carritoContainer = document.querySelector("#carrito-container");
-    carritoContainer.innerHTML = ""; // Limpiamos el contenido actual
+    carritoContainer.innerHTML = ""; 
 
     if (carrito.length === 0) {
-        carritoContainer.innerHTML = "<p>Tu carrito está vacío.</p>"; // Solo mostramos el mensaje en HTML
+        carritoContainer.innerHTML = "<p>Tu carrito está vacío.</p>";
     } else {
         carrito.forEach(item => {
             const itemHTML = `
@@ -63,7 +63,8 @@ function actualizarCarrito() {
     }
 }
 
-// Agregar al carrito (tanto productos de Naruto como DBZ)
+// Agregar al carrito
+
 document.querySelectorAll(".agregar-carrito").forEach(button => {
     button.addEventListener("click", function() {
         const idProducto = parseInt(this.getAttribute("data-id"));
@@ -74,7 +75,7 @@ document.querySelectorAll(".agregar-carrito").forEach(button => {
         const productoEnCarrito = carrito.find(p => p.id === producto.id);
 
         if (productoEnCarrito) {
-            productoEnCarrito.cantidad += 1; // Si ya está en el carrito, aumentamos la cantidad
+            productoEnCarrito.cantidad += 1; 
         } else {
             carrito.push({
                 ...producto,
@@ -87,28 +88,26 @@ document.querySelectorAll(".agregar-carrito").forEach(button => {
     });
 });
 
-// Retirar un artículo del carrito
+// Retirar articulos del carrito
 document.addEventListener("click", function(event) {
     if (event.target && event.target.classList.contains("retirar")) {
         const idProducto = parseInt(event.target.getAttribute("data-id"));
-        carrito = carrito.filter(item => item.id !== idProducto); // Elimina el artículo del carrito
-
-        // Actualizamos el carrito
+        carrito = carrito.filter(item => item.id !== idProducto);
         actualizarCarrito();
     }
 });
 
-// Función para finalizar la compra
+// Finalizar la compra
 function finalizarCompra() {
     const mensajeCompra = document.querySelector("#mensaje-compra");
     const nuevaCompraBtn = document.querySelector("#nueva-compra");
     const carritoContainer = document.querySelector("#carrito-container");
     const finalizarBtn = document.querySelector("#finalizar-compra");
-    mensajeCompra.innerHTML = ""; // Limpiamos los mensajes anteriores
+    mensajeCompra.innerHTML = "";
 
     if (carrito.length === 0) {
         mensajeCompra.innerHTML = "<p>Tu carrito está vacío.</p>";
-        return; // No hacer nada si el carrito está vacío
+        return; 
     }
 
     let detalleCompra = "Resumen de tu compra:<br>";
@@ -122,7 +121,7 @@ function finalizarCompra() {
 
     detalleCompra += `Total a pagar: $${total}<br>`;
 
-    // Agregar el resumen de compra al contenedor de mensajes
+    // Resumen de compra
     mensajeCompra.innerHTML += `<p>${detalleCompra}</p>`;
 
     // Cashealo: solo se puede usar si el total es mayor o igual a 25
@@ -132,21 +131,20 @@ function finalizarCompra() {
         mensajeCompra.innerHTML += `<p>Tu total es de $${total}. No puedes usar Cashea ya que el total es menor a $25.</p>`;
     }
 
-    // Ocultamos los productos, el botón de finalizar y el contenedor del carrito
+    // Ocultamos los productos, el botón de finalizar
     carritoContainer.style.display = "none";
     finalizarBtn.style.display = "none";
 
     // Mostrar el botón "Nueva compra" después de finalizar la compra
-    nuevaCompraBtn.style.display = "inline-block"; // Mostrar el botón
+    nuevaCompraBtn.style.display = "inline-block";
 }
 
 // Función para reiniciar el carrito
 document.querySelector("#nueva-compra").addEventListener("click", function() {
-    carrito = []; // Reseteamos el carrito
-    actualizarCarrito(); // Actualizamos la vista del carrito
-    document.querySelector("#mensaje-compra").innerHTML = ""; // Limpiamos los mensajes de la compra
+    carrito = []; 
+    actualizarCarrito(); 
+    document.querySelector("#mensaje-compra").innerHTML = "";
 
-    // Ocultamos el botón "Nueva compra" después de reiniciar
     document.querySelector("#nueva-compra").style.display = "none"; 
 
     // Mostramos los productos y el botón "Finalizar compra"
