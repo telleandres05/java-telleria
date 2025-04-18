@@ -102,6 +102,8 @@ document.addEventListener("click", function(event) {
 function finalizarCompra() {
     const mensajeCompra = document.querySelector("#mensaje-compra");
     const nuevaCompraBtn = document.querySelector("#nueva-compra");
+    const carritoContainer = document.querySelector("#carrito-container");
+    const finalizarBtn = document.querySelector("#finalizar-compra");
     mensajeCompra.innerHTML = ""; // Limpiamos los mensajes anteriores
 
     if (carrito.length === 0) {
@@ -130,6 +132,10 @@ function finalizarCompra() {
         mensajeCompra.innerHTML += `<p>Tu total es de $${total}. No puedes usar Cashea ya que el total es menor a $25.</p>`;
     }
 
+    // Ocultamos los productos, el botón de finalizar y el contenedor del carrito
+    carritoContainer.style.display = "none";
+    finalizarBtn.style.display = "none";
+
     // Mostrar el botón "Nueva compra" después de finalizar la compra
     nuevaCompraBtn.style.display = "inline-block"; // Mostrar el botón
 }
@@ -142,6 +148,10 @@ document.querySelector("#nueva-compra").addEventListener("click", function() {
 
     // Ocultamos el botón "Nueva compra" después de reiniciar
     document.querySelector("#nueva-compra").style.display = "none"; 
+
+    // Mostramos los productos y el botón "Finalizar compra"
+    document.querySelector("#carrito-container").style.display = "block";
+    document.querySelector("#finalizar-compra").style.display = "inline-block";
 });
 
 // Botón para finalizar la compra
