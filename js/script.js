@@ -1,4 +1,4 @@
-// Productos en stock
+// Productos en stock 
 const prodNaruto = [
     { nombre: "Anillos de Akatsuki", precio: 2.00, id: 1 },
     { nombre: "Collar de Naruto", precio: 1.75, id: 2 },
@@ -16,8 +16,8 @@ let carrito = [];
 
 // Función para mostrar productos
 function mostrarProductos(productos, section) {
-    section.innerHTML = productos.map(producto => `
-    <div class="grupo">
+    section.innerHTML = productos.map(producto => 
+    `<div class="grupo">
         <div class="img">
             <img src="./img/${producto.id}.jpg" alt="${producto.nombre}" />
             <div class="desc">
@@ -32,8 +32,9 @@ function mostrarProductos(productos, section) {
                 </div>
             </div>
         </div>
-    </div>
-`).join('')};
+    </div>`
+).join('');
+}
 
 // Mostrar productos en las secciones correspondientes
 const sectionNaruto = document.querySelector("#naruto");
@@ -48,7 +49,7 @@ function actualizarCarrito() {
     carritoContainer.innerHTML = ""; // Limpiamos el contenido actual
 
     if (carrito.length === 0) {
-        carritoContainer.innerHTML = "<p>Tu carrito está vacío.</p>";
+        carritoContainer.innerHTML = "<p>Tu carrito está vacío.</p>"; // Solo mostramos el mensaje en HTML
     } else {
         carrito.forEach(item => {
             const itemHTML = `
@@ -99,31 +100,49 @@ document.addEventListener("click", function(event) {
 
 // Función para finalizar la compra
 function finalizarCompra() {
+    const mensajeCompra = document.querySelector("#mensaje-compra");
+    const nuevaCompraBtn = document.querySelector("#nueva-compra");
+    mensajeCompra.innerHTML = ""; // Limpiamos los mensajes anteriores
+
     if (carrito.length === 0) {
-        alert("Tu carrito está vacío.");
-        return;
+        mensajeCompra.innerHTML = "<p>Tu carrito está vacío.</p>";
+        return; // No hacer nada si el carrito está vacío
     }
 
-    let detalleCompra = "Resumen de tu compra:\n";
+    let detalleCompra = "Resumen de tu compra:<br>";
     let total = 0;
 
     carrito.forEach(item => {
         const subtotal = item.cantidad * item.precio;
-        detalleCompra += `${item.cantidad} x ${item.nombre} - $${subtotal}\n`;
+        detalleCompra += `${item.cantidad} x ${item.nombre} - $${subtotal}<br>`;
         total += subtotal;
     });
 
-    detalleCompra += `Total a pagar: $${total}`;
+    detalleCompra += `Total a pagar: $${total}<br>`;
 
-    alert(detalleCompra);
+    // Agregar el resumen de compra al contenedor de mensajes
+    mensajeCompra.innerHTML += `<p>${detalleCompra}</p>`;
 
     // Cashealo: solo se puede usar si el total es mayor o igual a 25
     if (total >= 25) {
-        alert(`Tu total es de $${total}. Puedes usar Cashea y pagarlo en cuotas.`);
+        mensajeCompra.innerHTML += `<p>Tu total es de $${total}. Puedes usar Cashea y pagarlo en cuotas.</p>`;
     } else {
-        alert(`Tu total es de $${total}. No puedes usar Cashea ya que el total es menor a $25.`);
+        mensajeCompra.innerHTML += `<p>Tu total es de $${total}. No puedes usar Cashea ya que el total es menor a $25.</p>`;
     }
+
+    // Mostrar el botón "Nueva compra" después de finalizar la compra
+    nuevaCompraBtn.style.display = "inline-block"; // Mostrar el botón
 }
+
+// Función para reiniciar el carrito
+document.querySelector("#nueva-compra").addEventListener("click", function() {
+    carrito = []; // Reseteamos el carrito
+    actualizarCarrito(); // Actualizamos la vista del carrito
+    document.querySelector("#mensaje-compra").innerHTML = ""; // Limpiamos los mensajes de la compra
+
+    // Ocultamos el botón "Nueva compra" después de reiniciar
+    document.querySelector("#nueva-compra").style.display = "none"; 
+});
 
 // Botón para finalizar la compra
 const finalizarBtn = document.querySelector("#finalizar-compra");

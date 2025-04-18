@@ -155,7 +155,7 @@ footer {
   transition: 0.8s;
 } */
 
-/*estilos de accesorios movil*/
+/*estilos de accesorios desktop*/
 
 #acc {
   background-color: #d7d8d8;
@@ -204,6 +204,17 @@ footer {
   border-radius: 5px;
   border: none;
   padding: 3px;
+}
+
+#nueva-compra{
+  background-color: #f4a710;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+#mensaje-compra{
+  text-align: center;
+  padding-top: 10px;
 }
 
 #index #acc #productos #naruto, #index #acc #productos #dbz{
@@ -367,18 +378,28 @@ footer {
 }
 
 /*mq accesorio tablet*/
-@media screen and (min-width: 760px) {
-  #acc #naruto, #acc #dbz {
+@media screen and (max-width: 420px) {
+
+  #index #acc #productos #naruto, #index #acc #productos #dbz{
     display: flex;
     flex-direction: column;
+  }
+
+  #index #acc #productos #naruto .grupo, #index #acc #productos #dbz .grupo{
+    padding: 10px 0;
+
+  }
+  /* #acc #productos #naruto, #productos #acc #dbz {
+    display: flex;
+    flex-direction: row;
     text-align: center;
     justify-content: space-around;
     margin: 0 auto;
   }
   #acc #naruto .grupo, #acc #dbz .grupo {
     display: flex;
-    flex-direction: row;
-  }
+    flex-direction: column;
+  } */
   #acc #naruto .grupo .img, #acc #dbz .grupo .img {
     display: flex;
     flex-direction: column;
