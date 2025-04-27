@@ -12,7 +12,7 @@ const prodDbz = [
 ];
 
 // Variable para el carrito
-let carrito = JSON.parse(localStorage.getItem('carrito')) || []; // Cargar desde LocalStorage si existe
+let carrito = JSON.parse(localStorage.getItem('carrito')) || []; 
 
 // Mostrar productos en HTML
 function mostrarProductos(productos, section) {
@@ -81,7 +81,7 @@ document.querySelectorAll(".agregar-carrito").forEach(button => {
         const productoEnCarrito = carrito.find(p => p.id === producto.id);
 
         if (productoEnCarrito) {
-            productoEnCarrito.cantidad += 1; // Si ya está en el carrito, aumentar la cantidad
+            productoEnCarrito.cantidad += 1; 
         } else {
             carrito.push({
                 ...producto,
@@ -89,7 +89,7 @@ document.querySelectorAll(".agregar-carrito").forEach(button => {
             });
         }
 
-        // Actualizamos la UI del carrito
+        
         actualizarCarrito();
 
         // Cambiar a la vista de cantidad
@@ -186,10 +186,10 @@ function finalizarCompra() {
 
 // Reiniciar el carrito y mostrar productos
 document.querySelector("#nueva-compra").addEventListener("click", function() {
-    carrito = [];  // Limpiar el carrito
-    actualizarCarrito();  // Actualizar el contenido del carrito
+    carrito = [];  
+    actualizarCarrito();  
 
-    // Limpiar la UI del carrito y la vista de productos
+
     document.querySelector("#mensaje-compra").innerHTML = "";
     document.querySelector("#nueva-compra").style.display = "none";
     document.querySelector("#carrito-container").style.display = "block";
@@ -201,10 +201,10 @@ document.querySelector("#nueva-compra").addEventListener("click", function() {
         const botonCantidad = document.querySelector(`.botton[data-id="${producto.id}"] .botton3`);
 
         if (botonAgregar) {
-            botonAgregar.style.display = "block";  // Mostrar el botón de agregar
+            botonAgregar.style.display = "block"; 
         }
         if (botonCantidad) {
-            botonCantidad.style.display = "none";  // Ocultar el botón de cantidad
+            botonCantidad.style.display = "none"; 
         }
     });
 });
@@ -217,7 +217,7 @@ if (finalizarBtn) {
 
 // Verificar si el carrito tiene productos al cargar la página y actualizar los botones
 window.addEventListener("load", function() {
-    // Mostrar productos en el carrito
+
     actualizarCarrito();
 
     carrito.forEach(item => {
@@ -225,9 +225,9 @@ window.addEventListener("load", function() {
         const botonCantidad = document.querySelector(`.botton[data-id="${item.id}"] .botton3`);
 
         if (botonAgregar && botonCantidad) {
-            botonAgregar.style.display = "none";  // Ocultar el botón de agregar
-            botonCantidad.style.display = "block";  // Mostrar el botón de cantidad
-            botonCantidad.querySelector('.cantidad').value = item.cantidad;  // Establecer la cantidad en el input
+            botonAgregar.style.display = "none"; 
+            botonCantidad.style.display = "block"; 
+            botonCantidad.querySelector('.cantidad').value = item.cantidad; 
         }
     });
 });
