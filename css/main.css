@@ -285,6 +285,16 @@ footer {
   color: black;
 }
 
+#acc #naruto .grupo .img .botton .botton3{
+  display: none;
+}
+#acc #naruto .grupo .img .botton .botton3 button{
+  width: 40px;
+}
+
+#acc #naruto .grupo .img .botton .botton3 input{
+  width: 50px;
+}
 #acc #naruto .grupo .img .botton2 {
   display: inline-block;
   justify-items: center;
@@ -360,6 +370,18 @@ footer {
 #acc #dbz .grupo .img .botton .botton1 a, #acc #dbz .grupo .img .botton2 a {
   text-decoration: none;
   color: black;
+}
+
+#acc #dbz .grupo .img .botton .botton3{
+  display: none;
+}
+
+#acc #dbz .grupo .img .botton .botton3 button{
+  width: 40px;
+}
+
+#acc #dbz .grupo .img .botton .botton3 input{
+  width: 50px;
 }
 
 #acc #dbz .grupo .img .botton2 {
